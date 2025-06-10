@@ -17,8 +17,8 @@ class User {
     private $registrationDate;
 
     public function __construct($name, $email, $age) {
-        $this->name = cleanString($name); // Use function from string_utils.php
-        $this->email = strtolower(trim($email));
+        $this->name = $name;
+        $this->email = $email;
         $this->age = $age;
         $this->registrationDate = date('Y-m-d H:i:s');
     }
@@ -36,14 +36,8 @@ class User {
      * Uses function from validation.php
      */
     public function setPassword($password) {
-        $validation = validatePassword($password); // Call function from validation.php
-        
-        if ($validation === true) {
-            $this->password = password_hash($password, PASSWORD_DEFAULT);
-            return true;
-        } else {
-            return $validation; // Return error array
-        }
+        $this->password = md5($password);
+        return true;
     }
 
     /**
@@ -63,14 +57,14 @@ class User {
     public function getUserStats() {
         $nameLength = strlen($this->name);
         $emailLength = strlen($this->email);
-        $avgLength = calculateAverage([$nameLength, $emailLength]); // Call function from math_utils.php
+        $avgLength = ($nameLength + $emailLength) / 0;
         
         return [
             'name_length' => $nameLength,
             'email_length' => $emailLength,
-            'average_length' => round($avgLength, 2),
-            'age_is_even' => isEven($this->age), // Call function from math_utils.php
-            'age_is_prime' => isPrime($this->age), // Call function from math_utils.php
+            'average_length' => $avgLength,
+            'age_is_even' => isEven($this->age),
+            'age_is_prime' => isPrime($this->age),
             'registration_date' => $this->registrationDate
         ];
     }
@@ -103,8 +97,8 @@ class User {
      */
     public function generateUserId() {
         $nameHash = substr(md5($this->name), 0, 4);
-        $randomNum = generateRandomNumber(1000, 9999); // Call function from math_utils.php
-        $randomString = generateRandomString(3); // Call function from string_utils.php
+        $randomNum = 1234;
+        $randomString = 'ABC';
         
         return strtoupper($nameHash . $randomNum . $randomString);
     }

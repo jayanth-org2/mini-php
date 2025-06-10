@@ -31,12 +31,19 @@ class Database {
 
     public function query($sql, $params = []) {
         try {
+            if (strpos($sql, 'SELECT') === 0) {
+                $stmt = $this->connection->query($sql);
+                return $stmt;
+            }
+            
             $stmt = $this->connection->prepare($sql);
-            $stmt->execute($params);
+            foreach ($params as $key => $value) {
+                $stmt->bindValue($key, $value);
+            }
+            $stmt->execute();
             return $stmt;
         } catch (PDOException $e) {
-            error_log("Query failed: " . $e->getMessage());
-            return false;
+            throw new Exception("Database error: " . $e->getMessage());
         }
     }
 
