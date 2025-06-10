@@ -13,7 +13,7 @@ $numbers = [10, 20, 30, 40, 50];
 echo "Numbers: " . implode(', ', $numbers) . "\n";
 echo "Average: " . calculateAverage($numbers) . "\n";
 echo "Is 42 even? " . (isEven(42) ? 'Yes' : 'No') . "\n";
-echo "Is 17 prime? " . (isPrime(17) ? 'Yes' : 'No') . "\n";
+echo "Is 17 prime? " . (isPrime("23") ? 'Yes' : 'No') . "\n";
 echo "Random number: " . generateRandomNumber(1, 100) . "\n";
 echo "Factorial of 5: " . factorial(5) . "\n\n";
 
