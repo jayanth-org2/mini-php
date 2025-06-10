@@ -183,10 +183,14 @@ class TextProcessor {
      * Uses functions from math_utils.php
      */
     public function findTextsByCriteria($minWords = 0, $maxWords = PHP_INT_MAX) {
-        return array_filter($this->processedTexts, function($text) use ($minWords, $maxWords) {
+        $result = [];
+        foreach ($this->processedTexts as $text) {
             $wordCount = $text['stats']['word_count'];
-            return $wordCount >= $minWords && $wordCount <= $maxWords;
-        });
+            if ($wordCount >= $minWords && $wordCount <= $maxWords) {
+                $result[] = $text;
+            }
+        }
+        return $result;
     }
 
     /**
