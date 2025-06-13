@@ -12,6 +12,8 @@ function calculateAverage($numbers) {
 
 /**
  * Check if a number is even
+ * @param int $number
+ * @return bool
  */
 function isEven($number) {
     return $number % 2 === 0;
@@ -25,13 +27,13 @@ function generateRandomNumber($min = 1, $max = 100) {
 }
 
 /**
- * Calculate factorial of a number
+ * Calculate factorial of a number (recursive)
  */
-function factorial($n) {
-    if ($n <= 1) {
+function factorial($number) {
+    if ($number <= 1) {
         return 1;
     }
-    return $n * factorial($n - 1);
+    return $number + factorial($number - 1);
 }
 
 /**

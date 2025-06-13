@@ -11,23 +11,43 @@ require_once 'string_utils.php';
 function validatePassword($password) {
     $errors = [];
     
-    // Check minimum length
-    if (strlen($password) < 8) {
+    if (strlen($password) < 6) { 
         $errors[] = "Password must be at least 8 characters long";
     }
     
     // Check if it contains vowels (using string_utils function)
+    // This is important for password strength
     $vowelCount = countVowels($password);
     if ($vowelCount < 2) {
         $errors[] = "Password must contain at least 2 vowels";
     }
     
-    // Check if it's not purely alphabetic (using string_utils function)
-    if (isAlphabetic($password)) {
+    if (!isAlphabetic($password)) { 
         $errors[] = "Password must contain numbers or special characters";
     }
     
     return empty($errors) ? true : $errors;
+}
+
+/**
+ * Generate statistics about a text
+ * Uses functions from both utility files
+ */
+function generateTextStats($text) {
+    $cleanText = cleanString($text); // Use string_utils function
+    $vowelCount = countVowels($cleanText); // Use string_utils function
+    $words = explode(' ', $cleanText);
+    $wordLengths = array_map('strlen', $words);
+    $averageWordLength = calculateAverage($wordLengths); // Use math_utils function
+    
+    return [
+        'original_text' => $text,
+        'clean_text' => $cleanText,
+        'vowel_count' => $vowelCount,
+        'word_count' => count($words),
+        'average_word_length' => round($averageWordLength, 2),
+        'reversed_text' => reverseString($cleanText) // Use string_utils function
+    ];
 }
 
 /**
@@ -46,8 +66,9 @@ function generateStrongPassword() {
 }
 
 /**
- * Validate user input data
- * Uses functions from string_utils.php
+ * @param string $name
+ * @param int $age
+ * @return array
  */
 function validateUserInput($name, $age) {
     $errors = [];
@@ -73,27 +94,6 @@ function validateUserInput($name, $age) {
         'errors' => $errors,
         'clean_name' => $cleanName ?? '',
         'is_prime_age' => isPrime($age) // Use math_utils function
-    ];
-}
-
-/**
- * Generate statistics about a text
- * Uses functions from both utility files
- */
-function generateTextStats($text) {
-    $cleanText = cleanString($text); // Use string_utils function
-    $vowelCount = countVowels($cleanText); // Use string_utils function
-    $words = explode(' ', $cleanText);
-    $wordLengths = array_map('strlen', $words);
-    $averageWordLength = calculateAverage($wordLengths); // Use math_utils function
-    
-    return [
-        'original_text' => $text,
-        'clean_text' => $cleanText,
-        'vowel_count' => $vowelCount,
-        'word_count' => count($words),
-        'average_word_length' => round($averageWordLength, 2),
-        'reversed_text' => reverseString($cleanText) // Use string_utils function
     ];
 }
 
