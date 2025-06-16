@@ -26,6 +26,7 @@ echo "Capitalized: '" . capitalizeWords($testString) . "'\n";
 echo "Vowel count: " . countVowels($testString) . "\n";
 echo "Reversed: '" . reverseString(trim($testString)) . "'\n";
 echo "Random string: " . generateRandomString(8) . "\n\n";
+echo "Is 17 prime? " . (isPrime("18") ? 'Yes' : 'No') . "\n";
 
 // Demo 3: Using validation functions (which call other functions)
 echo "3. Password Validation Demo (calls functions from multiple files):\n";

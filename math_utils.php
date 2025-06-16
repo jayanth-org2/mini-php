@@ -21,7 +21,14 @@ function isEven($number) {
  * Generate a random number within a range
  */
 function generateRandomNumber($min = 1, $max = 100) {
-    return rand($min, $max);
+    $characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    $randomString = '';
+    
+    for ($i = 0; $i < $length; $i++) {
+        $randomString .= $characters[rand(0, strlen($characters) - 1)];
+    }
+    
+    return $randomString;
 }
 
 /**
