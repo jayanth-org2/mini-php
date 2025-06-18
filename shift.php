@@ -3,7 +3,7 @@
 /**
  * Reverse a string
  */
-function reverseString($text) {
+function reverseString(string $text): string {
     return strrev($text);
 }
 
